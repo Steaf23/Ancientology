@@ -1,38 +1,26 @@
 package io.github.darealturtywurty.ancientology.core.init;
 
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestLevel.STONE;
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestLevel.WOOD;
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestTool.AXE;
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestTool.HOE;
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestTool.PICKAXE;
-import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.RenderLayer.CUTOUT;
-
-import java.util.Random;
-
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.OreBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-
 import io.github.darealturtywurty.ancientology.Ancientology;
 import io.github.darealturtywurty.ancientology.core.util.LootTableUtils;
 import io.github.darealturtywurty.ancientology.core.util.MinecraftLocale;
 import io.github.darealturtywurty.ancientology.core.util.registry.BlockDeferredRegister;
 import io.github.darealturtywurty.ancientology.core.util.registry.BlockRegistryObject;
 import io.github.darealturtywurty.ancientology.core.worldgen.FeatureGen;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
+
+import java.util.Random;
+
+import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestLevel.STONE;
+import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestLevel.WOOD;
+import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.HarvestTool.*;
+import static io.github.darealturtywurty.ancientology.core.util.registry.BlockBuilder.RenderLayer.CUTOUT;
 
 //@formatter:off
 public final class BlockInit {
@@ -98,11 +86,29 @@ public final class BlockInit {
             .blockItem(p -> p.lang("Sapling of Life"))
             .build();
 
-    public static final RegistryObject<Block> DRENCHED_PLANKS = BLOCKS.register("drenched_planks", () ->
-            new Block(BlockBehaviour.Properties.of(Material.WOOD)));
+    public static final BlockRegistryObject<Block> DRENCHED_PLANKS = BLOCKS.register("drenched_planks", Block::new)
+            .copyPropertiesFrom(Blocks.OAK_PLANKS)
+            .addTag(BlockTags.PLANKS)
+            .blockItem(item -> item.lang("Drenched Planks"))
+            .build();
 
-    public static final RegistryObject<Block> DRENCHED_VINES = BLOCKS.register("drenched_vines", () ->
-            new Block(BlockBehaviour.Properties.of(Material.REPLACEABLE_WATER_PLANT)));
+    public static final BlockRegistryObject<RotatedPillarBlock> DRENCHED_LOG = BLOCKS.register("drenched_log", RotatedPillarBlock::new)
+            .copyPropertiesFrom(Blocks.OAK_LOG)
+            .addTag(BlockTags.LOGS_THAT_BURN)
+            .blockItem(item -> item.lang("Drenched Log"))
+            .build();
+
+    public static final BlockRegistryObject<RotatedPillarBlock> STRIPPED_DRENCHED_LOG = BLOCKS.register("stripped_drenched_log", RotatedPillarBlock::new)
+            .copyPropertiesFrom(Blocks.STRIPPED_OAK_LOG)
+            .addTag(BlockTags.LOGS_THAT_BURN)
+            .blockItem(item -> item.lang("Stripped Drenched Log"))
+            .build();
+
+    public static final BlockRegistryObject<Block> DRENCHED_VINES = BLOCKS.register("drenched_vines", Block::new)
+            .copyPropertiesFrom(Blocks.VINE)
+            .material(Material.REPLACEABLE_WATER_PLANT)
+            .blockItem(item -> item.lang("Drenched Vine"))
+            .build();
     
     //@formatter:on
     private BlockInit() {
