@@ -20,6 +20,11 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import io.github.darealturtywurty.ancientology.Ancientology;
 import io.github.darealturtywurty.ancientology.core.util.LootTableUtils;
@@ -31,6 +36,7 @@ import net.minecraftforge.common.Tags;
 
 //@formatter:off
 public final class BlockInit {
+
     public static final BlockDeferredRegister BLOCKS = BlockDeferredRegister.create(Ancientology.MODID, ItemInit.ITEMS);
 
     public static final BlockRegistryObject<OreBlock> DEEPSLATE_TIN_ORE = BLOCKS.register("deepslate_tin_ore",
@@ -91,6 +97,12 @@ public final class BlockInit {
             .renderLayer(CUTOUT)
             .blockItem(p -> p.lang("Sapling of Life"))
             .build();
+
+    public static final RegistryObject<Block> DRENCHED_PLANKS = BLOCKS.register("drenched_planks", () ->
+            new Block(BlockBehaviour.Properties.of(Material.WOOD)));
+
+    public static final RegistryObject<Block> DRENCHED_VINES = BLOCKS.register("drenched_vines", () ->
+            new Block(BlockBehaviour.Properties.of(Material.REPLACEABLE_WATER_PLANT)));
     
     //@formatter:on
     private BlockInit() {

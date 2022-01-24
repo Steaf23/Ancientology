@@ -9,6 +9,13 @@ import io.github.darealturtywurty.ancientology.core.util.MinecraftLocale;
 import io.github.darealturtywurty.ancientology.core.util.registry.ItemDeferredRegister;
 import io.github.darealturtywurty.ancientology.core.util.registry.ItemRegistryObject;
 import net.minecraftforge.common.Tags;
+import io.github.darealturtywurty.ancientology.Ancientology;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 //@formatter:off
 public final class ItemInit {
@@ -29,7 +36,12 @@ public final class ItemInit {
     public static final ItemRegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot", Item::new).lang("Tin Ingot")
             .addTag(Tags.Items.INGOTS).build();
 
-    //@formatter:on
+    public static final RegistryObject<Item> DRENCHED_PLANKS = ITEMS.register("drenched_planks", () ->
+            new BlockItem(BlockInit.DRENCHED_PLANKS.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
+    public static final RegistryObject<Item> DRENCHED_VINES = ITEMS.register("drenched_vines", () ->
+            new BlockItem(BlockInit.DRENCHED_VINES.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+
     private ItemInit() {
         throw new IllegalAccessError("Illegal access to hidden initialization class!");
     }
